@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+  <title>文案產生器</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='dog.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
+  <h3>日常文案撰寫</h3>
+  <form action="/" method="post">
+    <input type="text" name="subject" placeholder="文案主題" value="{% if request.form.subject %}{{ request.form.subject }}{% endif %}" />
+    <input type="text" name="style" placeholder="人物風格" value="{% if request.form.style %}{{ request.form.style }}{% endif %}" />
+    <input type="text" name="lang" placeholder="語言" value="{% if request.form.lang %}{{ request.form.lang }}{% else %}繁體中文{% endif %}" />
+    <input type="text" name="words" placeholder="字數限制" value="{% if request.form.words %}{{ request.form.words }}{% else %}150字{% endif %}" />
+    <input type="submit" value="產生" />
+  </form>
+  {% if result %}
+  <div class="result">{{ result }}</div>
+  {% endif %}
+  <br>
+  {% if resultImg %}
+  <img src="{{ resultImg }}" />
+  <br>
+  <!-- <div class="resultImg">{{ resultImg }}</div> -->
+
+  {% endif %}
+</body>
